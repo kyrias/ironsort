@@ -1,4 +1,4 @@
-pub fn quicksort<T: PartialEq + PartialOrd>(vec: &mut [T]) -> &mut [T] {
+pub fn quicksort<T: PartialOrd>(vec: &mut [T]) -> &mut [T] {
     if vec.len() <= 1 {
         return vec;
     }
