@@ -33,4 +33,13 @@ mod tests {
 
         assert_eq!(unsorted, sorted.as_slice());
     }
+
+    #[test]
+    fn test_vec_of_u8() {
+        let sorted = "        Tabcdeeefghhijklmnoooopqrrstuuvwxyz".to_string().into_bytes();
+        let mut unsorted = "The quick brown fox jumps over the lazy dog".to_string().into_bytes();
+        quicksort(&mut unsorted);
+
+        assert_eq!(sorted, unsorted);
+    }
 }
