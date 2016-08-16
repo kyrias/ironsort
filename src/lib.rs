@@ -26,9 +26,9 @@ mod tests {
     use super::*;
 
     #[test]
-    fn it_works() {
-        let mut sorted = vec![1, 1, 2, 3, 3, 4, 5, 5, 6, 9];
-        let mut unsorted = vec![3, 1, 4, 1, 5, 9, 2, 6, 5, 3];
+    fn test_vec_of_u64() {
+        let sorted: Vec<u64> = vec![1, 1, 2, 3, 3, 4, 5, 5, 6, 9];
+        let mut unsorted: Vec<u64> = vec![3, 1, 4, 1, 5, 9, 2, 6, 5, 3];
         quicksort(&mut unsorted);
 
         assert_eq!(unsorted, sorted.as_slice());
