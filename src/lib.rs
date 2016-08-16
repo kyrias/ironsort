@@ -26,28 +26,28 @@ mod tests {
 
     #[test]
     fn test_vec_of_u64() {
-        let sorted: Vec<u64> = vec![1, 1, 2, 3, 3, 4, 5, 5, 6, 9];
-        let mut unsorted: Vec<u64> = vec![3, 1, 4, 1, 5, 9, 2, 6, 5, 3];
-        quicksort(&mut unsorted);
+        let presorted: Vec<u64> = vec![1, 1, 2, 3, 3, 4, 5, 5, 6, 9];
+        let mut vector: Vec<u64> = vec![3, 1, 4, 1, 5, 9, 2, 6, 5, 3];
+        quicksort(&mut vector);
 
-        assert_eq!(unsorted, sorted.as_slice());
+        assert_eq!(vector, presorted.as_slice());
     }
 
     #[test]
     fn test_vec_of_u8() {
-        let sorted = "        Tabcdeeefghhijklmnoooopqrrstuuvwxyz".to_string().into_bytes();
-        let mut unsorted = "The quick brown fox jumps over the lazy dog".to_string().into_bytes();
-        quicksort(&mut unsorted);
+        let presorted = "        Tabcdeeefghhijklmnoooopqrrstuuvwxyz".to_string().into_bytes();
+        let mut vector = "The quick brown fox jumps over the lazy dog".to_string().into_bytes();
+        quicksort(&mut vector);
 
-        assert_eq!(sorted, unsorted);
+        assert_eq!(presorted, vector);
     }
 
     #[test]
     fn test_array_of_u8() {
-        let sorted: [u8; 10] = [1, 2, 3, 4, 5, 5, 5, 7, 9, 10];
-        let mut unsorted: [u8; 10] = [7, 5, 3, 2, 5, 1, 4, 5, 9, 10];
-        quicksort(&mut unsorted);
+        let presorted: [u8; 10] = [1, 2, 3, 4, 5, 5, 5, 7, 9, 10];
+        let mut vector: [u8; 10] = [7, 5, 3, 2, 5, 1, 4, 5, 9, 10];
+        quicksort(&mut vector);
 
-        assert_eq!(sorted, unsorted);
+        assert_eq!(presorted, vector);
     }
 }
