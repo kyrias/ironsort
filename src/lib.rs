@@ -1,3 +1,18 @@
+//! # quicksort
+//!
+//! Quicksort is an efficient in-line sorting algorithm created by Tony Hoare.
+
+/// In-line sorting of a slice of T.
+///
+/// ```rust
+/// # use ironsort::quicksort;
+/// let presorted: Vec<u64> = vec![1, 1, 2, 3, 3, 4, 5, 5, 6, 9];
+/// let mut vector: Vec<u64> = vec![3, 1, 4, 1, 5, 9, 2, 6, 5, 3];
+/// quicksort(&mut vector);
+///
+/// assert_eq!(vector, presorted.as_slice());
+/// ```
+
 pub fn quicksort<T: PartialOrd>(vec: &mut [T]) {
     if vec.len() <= 1 {
         return;
