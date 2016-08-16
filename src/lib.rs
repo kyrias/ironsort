@@ -21,7 +21,11 @@ pub fn quicksort<T: PartialOrd>(vec: &mut [T]) {
 }
 
 #[cfg(test)]
+extern crate rand;
+
+#[cfg(test)]
 mod tests {
+    use rand::{self, Rng};
     use super::*;
 
     #[test]
@@ -49,5 +53,22 @@ mod tests {
         quicksort(&mut vector);
 
         assert_eq!(presorted, vector);
+    }
+
+    #[test]
+    fn test_random() {
+        let mut rng = rand::thread_rng();
+
+        for _ in 0u64 .. 10_000u64 {
+            let len: usize = rng.gen();
+            let mut vector = rng.gen_iter()
+                                .take((len % 64) + 1)
+                                .collect::<Vec<usize>>();
+            quicksort(&mut vector);
+
+            for i in 0 .. vector.len() - 1 {
+                assert!(vector[i] <= vector[i + 1])
+            }
+        }
     }
 }
