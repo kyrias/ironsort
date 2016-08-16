@@ -1,6 +1,6 @@
-pub fn quicksort<T: PartialOrd>(vec: &mut [T]) -> &mut [T] {
+pub fn quicksort<T: PartialOrd>(vec: &mut [T]) {
     if vec.len() <= 1 {
-        return vec;
+        return;
     }
     let pivot: usize = 0;
     let mut first_opened = Vec::new();
@@ -18,7 +18,6 @@ pub fn quicksort<T: PartialOrd>(vec: &mut [T]) -> &mut [T] {
     vec.swap(pivot, last_closed);
     quicksort(&mut vec[0..last_closed]);
     quicksort(&mut vec[last_closed+1..]);
-    vec
 }
 
 #[cfg(test)]
