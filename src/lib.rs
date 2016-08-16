@@ -1,0 +1,36 @@
+pub fn quicksort<T: PartialEq + PartialOrd>(vec: &mut [T]) -> &mut [T] {
+    if vec.len() <= 1 {
+        return vec;
+    }
+    let pivot: usize = 0;
+    let mut first_opened = Vec::new();
+    let mut last_closed: usize = 0;
+
+    for i in 1..vec.len() {
+        first_opened.push(i);
+        if vec[i] < vec[pivot] {
+            let to = first_opened.remove(0);
+            vec.swap(i, to);
+            last_closed = to;
+        }
+    }
+
+    vec.swap(pivot, last_closed);
+    quicksort(&mut vec[0..last_closed]);
+    quicksort(&mut vec[last_closed+1..]);
+    vec
+}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    #[test]
+    fn it_works() {
+        let mut sorted = vec![1, 1, 2, 3, 3, 4, 5, 5, 6, 9];
+        let mut unsorted = vec![3, 1, 4, 1, 5, 9, 2, 6, 5, 3];
+        quicksort(&mut unsorted);
+
+        assert_eq!(unsorted, sorted.as_slice());
+    }
+}
