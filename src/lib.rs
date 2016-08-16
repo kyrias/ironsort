@@ -42,4 +42,13 @@ mod tests {
 
         assert_eq!(sorted, unsorted);
     }
+
+    #[test]
+    fn test_array_of_u8() {
+        let sorted: [u8; 10] = [1, 2, 3, 4, 5, 5, 5, 7, 9, 10];
+        let mut unsorted: [u8; 10] = [7, 5, 3, 2, 5, 1, 4, 5, 9, 10];
+        quicksort(&mut unsorted);
+
+        assert_eq!(sorted, unsorted);
+    }
 }
