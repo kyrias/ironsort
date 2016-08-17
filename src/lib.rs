@@ -1,6 +1,9 @@
 //! # quicksort
 //!
 //! Quicksort is an efficient in-line sorting algorithm created by Tony Hoare.
+//!
+
+use std::cmp::Ordering;
 
 /// In-line sorting of a slice of T.
 ///
@@ -12,8 +15,12 @@
 ///
 /// assert_eq!(vector, presorted.as_slice());
 /// ```
+pub fn quicksort<T: Ord>(vec: &mut [T]) {
+    quicksort_by(vec, &Ord::cmp)
+}
 
-pub fn quicksort<T: PartialOrd>(vec: &mut [T]) {
+pub fn quicksort_by<T: PartialOrd, F>(vec: &mut [T], cmp: &F)
+    where F: Fn(&T, &T) -> Ordering {
     if vec.len() <= 1 {
         return;
     }
@@ -23,17 +30,21 @@ pub fn quicksort<T: PartialOrd>(vec: &mut [T]) {
 
     for i in 1..vec.len() {
         first_opened.push(i);
-        if vec[i] < vec[pivot] {
-            let to = first_opened.remove(0);
-            vec.swap(i, to);
-            last_closed = to;
+        match cmp(&vec[i], &vec[pivot]) {
+            Ordering::Less => {
+                let to = first_opened.remove(0);
+                vec.swap(i, to);
+                last_closed = to;
+            }
+            _ => { }
         }
     }
 
     vec.swap(pivot, last_closed);
-    quicksort(&mut vec[0..last_closed]);
-    quicksort(&mut vec[last_closed+1..]);
+    quicksort_by(&mut vec[0..last_closed], cmp);
+    quicksort_by(&mut vec[last_closed+1..], cmp);
 }
+
 
 #[cfg(test)]
 extern crate rand;
