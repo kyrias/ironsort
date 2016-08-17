@@ -15,6 +15,7 @@ use std::cmp::Ordering;
 ///
 /// assert_eq!(vector, presorted.as_slice());
 /// ```
+#[inline]
 pub fn quicksort<T: Ord>(vec: &mut [T]) {
     quicksort_by(vec, &Ord::cmp)
 }
