@@ -22,7 +22,9 @@ pub fn quicksort<T: Ord>(vec: &mut [T]) {
 
 pub fn quicksort_by<T: PartialOrd, F>(vec: &mut [T], cmp: &F)
     where F: Fn(&T, &T) -> Ordering {
-    if vec.len() <= 1 {
+
+    let len: usize = vec.len();
+    if len <= 1 {
         return;
     }
     let pivot: usize = 0;
