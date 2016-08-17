@@ -17,7 +17,7 @@ use std::cmp::Ordering;
 /// ```
 #[inline]
 pub fn quicksort<T: Ord>(vec: &mut [T]) {
-    quicksort_by(vec, &Ord::cmp)
+    quicksort_by(vec, &|x, y| x.cmp(y))
 }
 
 pub fn quicksort_by<T: PartialOrd, F>(vec: &mut [T], cmp: &F)
