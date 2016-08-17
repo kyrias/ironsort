@@ -31,24 +31,25 @@ pub fn quicksort_by<T: PartialOrd, F>(vec: &mut [T], cmp: &F)
     vec.swap(0, len / 2);
     let pivot: usize = 0;
 
-    let mut first_opened = Vec::with_capacity(len);
-    let mut last_closed: usize = 0;
+    let mut left: usize = 0;
+    let mut right:usize = vec.len() - 1;
 
-    for i in 1..vec.len() {
-        first_opened.push(i);
-        match cmp(&vec[i], &vec[pivot]) {
-            Ordering::Less => {
-                let to = first_opened.remove(0);
-                vec.swap(i, to);
-                last_closed = to;
-            }
-            _ => { }
+    while left < right {
+        while left < len && cmp(&vec[left], &vec[pivot]) != Ordering::Greater {
+            left += 1
+        }
+        while cmp(&vec[right], &vec[pivot]) == Ordering::Greater {
+            right -= 1
+        }
+
+        if left < right {
+            vec.swap(left, right);
         }
     }
 
-    vec.swap(pivot, last_closed);
-    quicksort_by(&mut vec[0..last_closed], cmp);
-    quicksort_by(&mut vec[last_closed+1..], cmp);
+    vec.swap(pivot, right);
+    quicksort_by(&mut vec[0..right], cmp);
+    quicksort_by(&mut vec[right+1..], cmp);
 }
 
 
