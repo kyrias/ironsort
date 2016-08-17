@@ -27,6 +27,8 @@ pub fn quicksort_by<T: PartialOrd, F>(vec: &mut [T], cmp: &F)
     if len <= 1 {
         return;
     }
+
+    vec.swap(0, len / 2);
     let pivot: usize = 0;
     let mut first_opened = Vec::new();
     let mut last_closed: usize = 0;
