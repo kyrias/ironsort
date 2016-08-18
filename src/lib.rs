@@ -50,13 +50,19 @@ pub fn quicksort_by<T: PartialOrd, F>(vec: &mut [T], cmp: &F)
     let mut right: usize = vec.len() - 1;
 
     while left < right {
-        while left < len && cmp(&vec[left], &vec[pivot]) != Ordering::Greater {
-            left += 1
-        }
-        while cmp(&vec[right], &vec[pivot]) == Ordering::Greater {
-            right -= 1
-        }
+        {
+            let pivot_item = &vec[pivot];
+            left += vec[left..]
+                .iter()
+                .take_while(|item| cmp(item, pivot_item) != Ordering::Greater)
+                .count();
 
+            right -= vec[..right + 1]
+                .iter()
+                .rev()
+                .take_while(|item| cmp(item, pivot_item) == Ordering::Greater)
+                .count();
+        }
         if left < right {
             vec.swap(left, right);
         }
