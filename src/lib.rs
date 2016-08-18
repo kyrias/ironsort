@@ -5,6 +5,7 @@
 
 use std::cmp::Ordering;
 
+
 /// In-place sorting of a slice of T.
 ///
 /// ```rust
@@ -20,6 +21,20 @@ pub fn quicksort<T: Ord>(vec: &mut [T]) {
     quicksort_by(vec, &|x, y| x.cmp(y))
 }
 
+
+/// In-place sorting of a slice of T using a custom comparison function.
+///
+/// ```rust
+/// # use ironsort::quicksort_by;
+/// # use std::cmp::Ordering;
+///
+/// let presorted: Vec<u64> = vec![9, 6, 5, 5, 4, 3, 3, 2, 1, 1];
+/// let mut vector: Vec<u64> = vec![3, 1, 4, 1, 5, 9, 2, 6, 5, 3];
+///
+/// quicksort_by(&mut vector, &|x, y| x.cmp(y).reverse());
+///
+/// assert_eq!(vector, presorted.as_slice());
+/// ```
 pub fn quicksort_by<T: PartialOrd, F>(vec: &mut [T], cmp: &F)
     where F: Fn(&T, &T) -> Ordering {
 
