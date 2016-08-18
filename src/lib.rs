@@ -1,11 +1,11 @@
 //! # quicksort
 //!
-//! Quicksort is an efficient in-line sorting algorithm created by Tony Hoare.
+//! Quicksort is an efficient in-place sorting algorithm created by Tony Hoare.
 //!
 
 use std::cmp::Ordering;
 
-/// In-line sorting of a slice of T.
+/// In-place sorting of a slice of T.
 ///
 /// ```rust
 /// # use ironsort::quicksort;
