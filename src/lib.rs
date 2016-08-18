@@ -43,8 +43,8 @@ pub fn quicksort_by<T: PartialOrd, F>(vec: &mut [T], cmp: &F)
         return;
     }
 
-    vec.swap(0, len / 2);
     let pivot: usize = 0;
+    vec.swap(pivot, len / 2);
 
     let mut left: usize = 0;
     let mut right: usize = vec.len() - 1;
