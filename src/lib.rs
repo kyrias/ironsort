@@ -35,7 +35,7 @@ pub fn quicksort<T: Ord>(vec: &mut [T]) {
 ///
 /// assert_eq!(vector, presorted.as_slice());
 /// ```
-pub fn quicksort_by<T: PartialOrd, F>(vec: &mut [T], cmp: &F)
+pub fn quicksort_by<T, F>(vec: &mut [T], cmp: &F)
     where F: Fn(&T, &T) -> Ordering {
 
     let len: usize = vec.len();
