@@ -119,4 +119,13 @@ mod tests {
             }
         }
     }
+
+    #[test]
+    fn test_long_zeroes() {
+        let mut vector = vec![0;10000];
+        quicksort(&mut vector);
+        for i in 0 .. vector.len() - 1 {
+            assert!(vector[i] <= vector[i + 1])
+        }
+    }
 }
