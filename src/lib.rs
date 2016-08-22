@@ -4,6 +4,7 @@
 //!
 
 use std::cmp::Ordering;
+use std::cmp;
 
 
 /// In-place sorting of a slice of T.
@@ -46,25 +47,26 @@ pub fn quicksort_by<T, F>(vec: &mut [T], cmp: &F)
     let pivot: usize = 0;
     vec.swap(pivot, len / 2);
 
-    let mut left: usize = 0;
+    let mut left: usize = 1;
     let mut right: usize = vec.len() - 1;
 
-    while left < right {
+    loop {
         while left < len && cmp(&vec[left], &vec[pivot]) != Ordering::Greater {
             left += 1
         }
-        while cmp(&vec[right], &vec[pivot]) == Ordering::Greater {
+        while right > 0 && cmp(&vec[right], &vec[pivot]) != Ordering::Less {
             right -= 1
         }
-
-        if left < right {
-            vec.swap(left, right);
+        if left >= right {
+            break;
         }
+        vec.swap(left, right);
+        left += 1;
+        right -= 1;
     }
-
     vec.swap(pivot, right);
-    quicksort_by(&mut vec[0..right], cmp);
-    quicksort_by(&mut vec[right+1..], cmp);
+    quicksort_by(&mut vec[0..cmp::min(left - 1, right)], cmp);
+    quicksort_by(&mut vec[cmp::max(left, right + 1)..], cmp);
 }
 
 
